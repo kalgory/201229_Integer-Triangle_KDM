@@ -30,6 +30,9 @@ int main(){
 }
 
 int solution(vector<vector<int>> triangle) {
+    int case_triangle=0;
+    
+    //top bottom
     int answer=0;
     vector<vector<int>> temp (triangle.size());
     for(int i=0;i<triangle.size();i++) temp[i].resize(i+1);
@@ -40,15 +43,14 @@ int solution(vector<vector<int>> triangle) {
             temp[i+1][j+1]=max(triangle[i+1][j+1]+temp[i][j],temp[i+1][j+1]);
         }
     }
+    for(int i=0;i<triangle.size();i++) answer=max(temp[triangle.size()-1][i],answer);
+    if(case_triangle) return answer;
 
-    /*
+    //bottom top
     for(int i=triangle.size()-1;i>0;--i){
         for(int j=0;j<i;j++){
             triangle[i-1][j]+=max(triangle[i][j],triangle[i][j+1]);
         }
-    }*/
-    print_vector(temp);
-    for(int i=0;i<triangle.size();i++) answer=max(temp[triangle.size()-1][i],answer);
-    cout<<answer;
-    return answer;
+    }
+    if(!case_triangle) return triangle[0][0] 
 }
